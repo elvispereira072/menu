@@ -21,6 +21,11 @@
             position: relative;
             z-index: 1;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            transition: box-shadow 0.3s;
+        }
+
+        .navbar:hover {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
         }
 
         @keyframes gradient {
@@ -62,11 +67,28 @@
 
         .nav-menu.active {
             opacity: 1;
-            transform: translateX(0);
+            transform: translateX(0) rotate(360deg);
         }
 
         .nav-menu li {
             margin-left: 1.5rem;
+            opacity: 0;
+            animation: fadeIn 0.5s forwards;
+        }
+
+        .nav-menu.active li {
+            opacity: 1;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .nav-link {
@@ -103,6 +125,7 @@
             flex-direction: column;
             cursor: pointer;
             transition: transform 0.3s;
+            animation: pulse 1.5s infinite;
         }
 
         .menu-toggle .bar {
@@ -125,6 +148,18 @@
             transform: translateY(-7px) rotate(-45deg);
         }
 
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
         /* Estilos responsivos */
         @media (max-width: 768px) {
             .menu-toggle {
@@ -144,11 +179,12 @@
             .nav-menu.active {
                 display: flex;
                 opacity: 1;
-                transform: translateX(0);
+                transform: translateX(0) rotate(360deg);
             }
 
             .nav-menu li {
                 margin: 1rem 0;
+                animation: fadeIn 0.5s forwards;
             }
         }
 
@@ -205,4 +241,7 @@
     </script>
 </body>
 </html>
+
+
+
 
