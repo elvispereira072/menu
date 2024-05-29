@@ -3,8 +3,139 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu Responsivo</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Menu Responsivo com Efeitos</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Estilos da Navbar */
+        .navbar {
+            background: linear-gradient(90deg, #333, #555, #333);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            color: #fff;
+            padding: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .navbar-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand {
+            font-size: 1.5rem;
+            text-decoration: none;
+            color: #fff;
+            transition: transform 0.3s;
+        }
+
+        .brand:hover {
+            transform: scale(1.1);
+        }
+
+        .nav-menu {
+            list-style: none;
+            display: flex;
+            transition: opacity 0.5s, transform 0.5s;
+            opacity: 1;
+        }
+
+        .nav-menu.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .nav-menu li {
+            margin-left: 1.5rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #fff;
+            font-size: 1rem;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .nav-link::after {
+            content: '';
+            display: block;
+            width: 0;
+            height: 2px;
+            background: #fff;
+            transition: width 0.3s;
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+        }
+
+        .nav-link:hover {
+            color: #f39c12;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .menu-toggle .bar {
+            height: 3px;
+            width: 25px;
+            background-color: #fff;
+            margin: 4px 0;
+            transition: all 0.3s;
+        }
+
+        /* Estilos responsivos */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                text-align: center;
+                opacity: 0;
+                transform: translateX(-100%);
+            }
+
+            .nav-menu.active {
+                display: flex;
+                opacity: 1;
+                transform: translateX(0);
+            }
+
+            .nav-menu li {
+                margin: 1rem 0;
+            }
+        }
+    </style>
 </head>
 <body>
     <nav class="navbar">
@@ -23,94 +154,24 @@
             </ul>
         </div>
     </nav>
-    <script src="scripts.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.getElementById('mobile-menu');
+            const navMenu = document.querySelector('.nav-menu');
+
+            menuToggle.addEventListener('click', function() {
+                navMenu.classList.toggle('active');
+                menuToggle.classList.toggle('open');
+            });
+
+            menuToggle.addEventListener('mouseover', function() {
+                menuToggle.style.transform = 'rotate(90deg)';
+            });
+
+            menuToggle.addEventListener('mouseout', function() {
+                menuToggle.style.transform = 'rotate(0deg)';
+            });
+        });
+    </script>
 </body>
 </html>
-
-<style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-/* Estilos da Navbar */
-.navbar {
-    background-color: #333;
-    color: #fff;
-    padding: 1rem;
-}
-
-.navbar-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.brand {
-    font-size: 1.5rem;
-    text-decoration: none;
-    color: #fff;
-}
-
-.nav-menu {
-    list-style: none;
-    display: flex;
-}
-
-.nav-menu li {
-    margin-left: 1.5rem;
-}
-
-.nav-link {
-    text-decoration: none;
-    color: #fff;
-    font-size: 1rem;
-}
-
-.menu-toggle {
-    display: none;
-    flex-direction: column;
-    cursor: pointer;
-}
-
-.menu-toggle .bar {
-    height: 3px;
-    width: 25px;
-    background-color: #fff;
-    margin: 4px 0;
-}
-
-/* Estilos responsivos */
-@media (max-width: 768px) {
-    .menu-toggle {
-        display: flex;
-    }
-
-    .nav-menu {
-        display: none;
-        flex-direction: column;
-        width: 100%;
-        text-align: center;
-    }
-
-    .nav-menu.active {
-        display: flex;
-    }
-
-    .nav-menu li {
-        margin: 1rem 0;
-    }
-}
-</style>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const menuToggle = document.getElementById('mobile-menu');
-    const navMenu = document.querySelector('.nav-menu');
-
-    menuToggle.addEventListener('click', function() {
-        navMenu.classList.toggle('active');
-    });
-});
-</script>
