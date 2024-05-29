@@ -20,6 +20,7 @@
             padding: 1rem;
             position: relative;
             z-index: 1;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
         }
 
         @keyframes gradient {
@@ -44,11 +45,12 @@
             font-size: 1.5rem;
             text-decoration: none;
             color: #fff;
-            transition: transform 0.3s;
+            transition: transform 0.3s, text-shadow 0.3s;
         }
 
         .brand:hover {
             transform: scale(1.1);
+            text-shadow: 2px 2px 8px rgba(243, 156, 18, 0.8);
         }
 
         .nav-menu {
@@ -72,7 +74,7 @@
             color: #fff;
             font-size: 1rem;
             position: relative;
-            transition: color 0.3s;
+            transition: color 0.3s, text-shadow 0.3s;
         }
 
         .nav-link::after {
@@ -89,6 +91,7 @@
 
         .nav-link:hover {
             color: #f39c12;
+            text-shadow: 2px 2px 8px rgba(243, 156, 18, 0.8);
         }
 
         .nav-link:hover::after {
@@ -110,6 +113,18 @@
             transition: all 0.3s;
         }
 
+        .menu-toggle.open .bar:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.open .bar:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+
+        .menu-toggle.open .bar:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+
         /* Estilos responsivos */
         @media (max-width: 768px) {
             .menu-toggle {
@@ -123,6 +138,7 @@
                 text-align: center;
                 opacity: 0;
                 transform: translateX(-100%);
+                transition: opacity 0.5s, transform 0.5s;
             }
 
             .nav-menu.active {
@@ -134,6 +150,20 @@
             .nav-menu li {
                 margin: 1rem 0;
             }
+        }
+
+        /* Efeito de entrada para o menu */
+        @keyframes slideIn {
+            from {
+                transform: translateX(-100%);
+            }
+            to {
+                transform: translateX(0);
+            }
+        }
+
+        .nav-menu.active {
+            animation: slideIn 0.5s forwards;
         }
     </style>
 </head>
@@ -175,3 +205,4 @@
     </script>
 </body>
 </html>
+
